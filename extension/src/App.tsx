@@ -34,7 +34,7 @@ export function App() {
     setQuiz(prev => [...prev, q]);
     console.log(quiz);
     displayQuiz();
-  }
+  } //
 
 
   //
