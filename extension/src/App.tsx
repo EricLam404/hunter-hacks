@@ -1,35 +1,59 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css"
+import { Quiz } from "./popup.tsx"
+export function App() {
+  //const [count, setCount] = useState(0)
+  const [url,setUrl] = useState("");
+  const [showInput,setShowInput] = useState<boolean>(true);
+  const [quiz,setQuiz] = useState<Quiz[]>([]);
+  
+  const handleUrl = (): void => {
+    if(showInput == true){
+      setShowInput(false);
+      console.log(url);
 
-function App() {
-  const [count, setCount] = useState(0)
+      //send urlto the openAI and scan content;
+    }else{
+      setShowInput(true);
+    }
+  };
 
+  const handleQuiz = (): void => {
+    const q = new Quiz("yes?", ["no","3","4","2"]);
+    setQuiz(prev => [...prev, q]);
+    console.log(quiz);
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className = "container">
+        <div className = "header">
+          {/* logo and name*/} 
+          <a></a>
+          <h1>Title</h1>
+        </div>
+        <div className="input-box">
+
+          {/* url input*/}
+          {showInput && (<input type="text" 
+          value={url} 
+          onChange={(e) => setUrl(e.target.value)}/>)}
+          {/* enter*/}
+          {showInput && (<button 
+          onClick={() => handleUrl()}>Enter</button>)}
+
+          {/* return*/}
+          {!showInput && (<button 
+          onClick={() => handleUrl()}>return</button>)}
+
+          {showInput && (<p>Insert link of textbook</p>)}
+          {!showInput && (<p>Link inputed!</p>)}
+        </div>
+        {/* This is temporary*/} 
+       <button onClick={()=> handleQuiz()}>wewe</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
+  
 }
 
 export default App
