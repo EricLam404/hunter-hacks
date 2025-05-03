@@ -191,7 +191,6 @@ export function App() {
               if(correct){
                 newCorrects = corrects + 1;
                 setCorrects(newCorrects);
-                console.log(newCorrects);
               }
               // tracks current quiz the user is on
               if (currentIndex + 1 < quiz.length) {
