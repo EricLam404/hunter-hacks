@@ -17,12 +17,23 @@ export function App() {
       setShowInput(true);
     }
   };
-
+  const displayQuiz = (): void => {
+    quiz.forEach((q, index) => {
+      console.log(`Question ${index + 1}: ${q.question}`);
+      console.log("Choices:");
+      q.choices.forEach((choice, i) => {
+        //65 being ASCII value is A
+        console.log(`  ${String.fromCharCode(65 + i)}. ${choice}`);
+      });
+    });
+  }
   const handleQuiz = (): void => {
     const q = new Quiz("yes?", ["no","3","4","2"]);
     setQuiz(prev => [...prev, q]);
     console.log(quiz);
+    displayQuiz();
   }
+
   return (
     <>
       <div className = "container">
