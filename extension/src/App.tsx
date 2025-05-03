@@ -1,10 +1,14 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import "./App.css"
 import { Quiz } from "./quiz.tsx"
+import { getActiveTabURL } from './utils/urlTracker';
+
+
 export function App() {
-  //Textbook URL
+  //const [count, setCount] = useState(0)
   const [url,setUrl] = useState("");
-  //Textbook Input
+  const [currentUrl,setCurrentUrl] = useState("");
+  
   const [showInput,setShowInput] = useState<boolean>(true);
 
   //List of Quizzes
@@ -124,8 +128,33 @@ export function App() {
     }
   };
 
+
+  //
+
+  // const [savedURL, setSavedUrl] = useState('');
+
+  useEffect(() => {
+    getActiveTabURL().then(setCurrentUrl).catch(console.error);
+    console.log(currentUrl);
+  }, []);
+
+  // const handleSaveUrl = () => {
+  //   setSavedUrl(url);
+  // }
+
+
+
+  // const handleSaveUrl = () => {
+  //   setSavedUrl(url);
+  // 
+
   return (
     <>
+    <div style={{ padding: '1rem', width: '250px' }}>
+      <h3>Current Tab URL:</h3>
+      <p style={{ wordWrap: 'break-word' }}>{url || 'Loading...'}</p>
+    </div>
+
       <div className = "container">
         <div className = "header">
           {/* logo and name*/} 
