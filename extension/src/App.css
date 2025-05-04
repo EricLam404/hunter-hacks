@@ -99,6 +99,7 @@
   text-align:center;
   padding-left:0;
   margin-left:0;
+  
 }
 .container .topic-box p {
     font-size: 20px;
@@ -109,9 +110,11 @@
     margin:0;
     margin-top:7px;
     margin-bottom:7px;
+
   }
-  
-.topic-box input{
+
+.container .topic-box input, .container .topic-box button{
+  margin-left:0;
 }
   @keyframes bounce {
     0% {

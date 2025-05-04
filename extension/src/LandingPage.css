@@ -25,5 +25,13 @@
     font-size: 12px;
     position: relative;
     overflow: hidden;
-    
+}
+.landing p{
+  font-size: 12px;
+  font-weight: bold;
+  color: #cfc2e2; 
+  display: inline-block;
+  margin:0;
+  margin-top:7px;
+  margin-bottom:7px;
 }
