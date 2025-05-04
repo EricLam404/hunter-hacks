@@ -11,7 +11,7 @@ const QuizPage = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [corrects, setCorrects] = useState<number>(0);
   const [inputTopic,setInputTopic] = useState<string>("");
-  
+  const [tracker,setTracker] = useState<boolean>(true);
   useEffect(() => {
     console.log("\nuse Effect: ");
     console.log("quiz length: " + quiz.length);
@@ -56,7 +56,14 @@ const QuizPage = () => {
     localStorage.setItem("corrects", JSON.stringify(corrects));
     localStorage.setItem("currentIndex", JSON.stringify(currentIndex));
   }, [quiz, corrects, currentIndex]);
+  const handleTracking = (): void =>{
+    if(tracker == true){
+      setTracker(false);
+    }else{
+      setTracker(true);
+    }
 
+  }
   const fetchQuizFromAPI = async (topic: string) => {
     console.log("fetchQuizFromAPI was called");
     if(topic != ""){
@@ -86,6 +93,8 @@ const QuizPage = () => {
       } catch (err) {
         console.error("Error fetching quiz:", err);
       }
+    }else{
+      alert("error enter a input");
     }
   };
 
@@ -112,7 +121,9 @@ const QuizPage = () => {
   };
 
   useEffect(() => {
-    getActiveTabURL().then(setCurrentUrl).catch(console.error);
+    if(tracker){
+      getActiveTabURL().then(setCurrentUrl).catch(console.error);
+    }
     console.log(currentUrl);
   }, []);
 
@@ -138,28 +149,32 @@ const QuizPage = () => {
           {quiz.length == 0 && (<p>Enter Topic!</p>)}
           {quiz.length == 0 && (<input
             className="topic"
+            placeholder = "Please enter a topic!"
             onChange={(e) => setInputTopic(e.target.value)}
           />)}
-          {quiz.length == 0 && (<button className="dev" onClick={() => fetchQuizFromAPI(inputTopic)}> QuizTEMPORARY </button>)}
+          {quiz.length == 0 && (<button className="dev" onClick={() => fetchQuizFromAPI(inputTopic)}> Quiz TEMPORARY </button>)}
         </div>
-
+          
         <div className="input-box">
-          {showInput && (
+          {showInput && quiz.length == 0 &&(
             <input
               type="text"
               value={url}
+              placeholder = "textbook url"
               onChange={(e) => setUrl(e.target.value)}
             />
           )}
-          {showInput && <button onClick={handleUrl}>Enter</button>}
-          {!showInput && <button onClick={handleUrl}>Return</button>}
-
-          {showInput ? (
-            <p>Insert link of textbook</p>
-          ) : (
-            <p>Link inputted!</p>
+          {showInput && quiz.length == 0 && <button onClick={handleUrl}>Enter</button>}
+          {!showInput && quiz.length == 0 && <button onClick={handleUrl}>Return</button>}
+          {quiz.length == 0 && (
+          <div>
+            {showInput ? (
+              <p>Insert link of textbook</p>
+            ) : (
+              <p>Link inputted!</p>
+            )}
+          </div>
           )}
-
           {currentIndex < quiz.length && (
             <QuizPopup
               quiz={quiz[currentIndex]}
@@ -171,7 +186,6 @@ const QuizPage = () => {
                   newCorrects = corrects + 1;
                   setCorrects(newCorrects);
                 }
-
                 if (currentIndex + 1 < quiz.length) {
                   setCurrentIndex(prev => prev + 1);
                 } else {
@@ -186,6 +200,12 @@ const QuizPage = () => {
               }}
             />
           )}
+          <div className = "footer">
+            {quiz.length == 0 && (
+            <button onClick={() => handleTracking()}> {tracker ? "Stop tracking" : "Start tracking"}
+            </button>
+            )}
+          </div>
         </div>
       </div>
     </>

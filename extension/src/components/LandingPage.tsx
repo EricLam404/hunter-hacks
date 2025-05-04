@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { getActiveTabURL } from '../utils/urlTracker';
-
+import '../LandingPage.css';
 const LandingPage = () => {
   const navigate = useNavigate();
 
