@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../App.css'
 
 const TopicPage = () => {
   const [topic, setTopic] = useState("");
@@ -16,18 +17,20 @@ const TopicPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="topic-box">Enter Your Topic</h2>
-      <input
-        type="text"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        placeholder="e.g. Photosynthesis"
-        className="topic-box input"
-      />
-      <button onClick={handleSubmit} className="input-box">
-        Start Quiz
-      </button>
+    <div className = "container">
+      <div className="topic-box">
+        <p >Enter Your Topic</p>
+        <input
+          type="text"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          placeholder="e.g. Photosynthesis"
+          className="topic-box input"
+        />
+        <button onClick={handleSubmit} className="input-box">
+          Start Quiz
+        </button>
+      </div>
     </div>
   );
 };

@@ -42,7 +42,7 @@
 }
 
 .input-box input,
-.input-box button, .topic-box input {
+.input-box button, .topic-box input, .topic-box button{
   all: unset; 
   box-sizing: border-box;
   border-radius: 12px;
@@ -67,7 +67,7 @@
 }
 
 .input-box button,
- .quiz button{
+ .quiz button, .topic-box button{
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -76,7 +76,7 @@
   text-align:center;
 }
 
-.input-box button:hover {
+.input-box, .topic-box button:hover {
   border-color: #646cff;
 }
 
@@ -100,7 +100,7 @@
   padding-left:0;
   margin-left:0;
 }
-.topic-box p {
+.container .topic-box p {
     font-size: 20px;
     font-weight: bold;
     color: #cfc2e2; 
@@ -110,8 +110,8 @@
     margin-top:7px;
     margin-bottom:7px;
   }
+  
 .topic-box input{
-  margin:0;
 }
   @keyframes bounce {
     0% {
