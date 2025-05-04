@@ -100,12 +100,3 @@
   padding-left:0;
   margin-left:0;
 }
-
-.footer button{
-  background-color:linear-gradient(to bottom right,  #7e22ce, #3067B0);
-  transition: background-color 0.3s ease;
-}
-
-.footer button.active {
-  background-color:linear-gradient(to bottom right,  #3067B0,#7e22ce);
-}
