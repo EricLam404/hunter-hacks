@@ -26,7 +26,7 @@ app.post("/generate", async (req, res) => {
     const response = await client.responses.create({
         model: "gpt-4.1-nano-2025-04-14",
         instructions: `You are a quiz generator assistant that generates well rounded multiple-choice questions. Generate 3 multiple-choice questions (with 4 options each) on the topic the user provides.
-        Return only the raw JSON with no Markdown or explanation. Format the output as JSON with this structure:
+        Return only the raw JSON with no Markdown or explanation. The answer must match one of the options exactly. Format the output as JSON with this structure:
         [
             {
                 "question": "...",
