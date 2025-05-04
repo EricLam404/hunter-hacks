@@ -7,19 +7,27 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   
-
   const handleStart = async () => {
     try {
       setLoading(true);
-      const url = await getActiveTabURL();           
-      localStorage.setItem("original_url", url);     // saving the original URL to local storage then moves to quiz page
-      navigate("/quiz");                             
+      const url = await getActiveTabURL();
+      
+      // Save in localStorage (optional), and send to background script
+      localStorage.setItem("original_url", url);
+      chrome.runtime.sendMessage({
+        action: "saveOriginalUrl",
+        url: url
+      }, () => {
+        console.log("✅ Sent original URL to background:", url);
+        navigate("/topic");
+      });
     } catch (err) {
       console.error("Failed to get URL:", err);
-    }finally {
-      setLoading(false); // Reset loading state
+    } finally {
+      setLoading(false);
     }
   };
+  
 
   return (
     <div className="landing">

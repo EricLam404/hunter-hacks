@@ -2,6 +2,7 @@ import './App.css';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import QuizPage from './components/QuizPage';
 import LandingPage from './components/LandingPage';
+import TopicPage from "./components/TopicPage"; 
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/topic" element={<TopicPage />} />
         <Route path="/quiz" element={<QuizPage />} />
       </Routes>
     </Router>

@@ -136,3 +136,52 @@
 .footer button:active {
   transform: scale(1.1);
 }
+
+
+
+/* === Topic Page Styling === */
+.topic-container {
+  width: 300px;
+  height: 400px;
+  background: linear-gradient(to bottom right, #7b2ff7, #40c9ff);
+  border-radius: 8px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.topic-container h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.topic-input {
+  width: 220px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.topic-button {
+  background-color: #111;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.topic-button:hover {
+  transform: scale(1.05);
+}
+
+

@@ -66,18 +66,16 @@ const QuizPage = () => {
   }
   const fetchQuizFromAPI = async (topic: string) => {
     console.log("fetchQuizFromAPI was called");
-    if(topic != ""){
+  
+    if (topic !== "") {
       try {
-
-         // Saving the topic to the server
-        console.log("Saving topic to server:", topic);
-        await fetch("http://localhost:3000/save-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic })
-        });
-
-        //Then generating the quiz
+        const url = localStorage.getItem("original_url") || "";
+        console.log("📦 Fetched original_url from storage:", url);
+  
+        // ✅ Save the session (url + topic)
+        await saveSession(url, topic);
+  
+        // ✅ Then generate the quiz
         console.log("Generating quiz for topic:", topic);
         const response = await fetch("http://localhost:3000/api/generate", {
           method: "POST",
@@ -86,8 +84,7 @@ const QuizPage = () => {
           },
           body: JSON.stringify({ topic })
         });
-        
-
+  
         if (!response.ok) {
           throw new Error("Failed to fetch quiz");
         }
@@ -105,10 +102,11 @@ const QuizPage = () => {
       } catch (err) {
         console.error("Error fetching quiz:", err);
       }
-    }else{
-      alert("error enter a input");
+    } else {
+      alert("❌ Please enter a topic");
     }
   };
+  
 
   const QuizPopup: React.FC<{ quiz: Quiz, onAnswer: (choice: string) => void }> = ({ quiz, onAnswer }) => {
     return (
@@ -144,6 +142,24 @@ const QuizPage = () => {
     const originalUrl = localStorage.getItem("original_url");
     console.log("Original URL from Landing Page:", originalUrl);
   }, []);
+
+  const saveSession = async (url: string, topic: string) => {
+    try {
+      const response = await fetch("http://localhost:3000/save-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ original_url: url, topic })
+      });
+  
+      const data = await response.json();
+      console.log("✅ Session saved:", data);
+    } catch (error) {
+      console.error("❌ Error saving session:", error);
+    }
+  };
+  
   return (
     <>
       {/* <div style={{ padding: '1rem', width: '250px' }}>
