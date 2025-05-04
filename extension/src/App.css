@@ -159,3 +159,28 @@
   background-color: #e74c3c;
   color: #fff;
 }
+
+/* Super-specific style for just the Stop Tracking button */
+.container .footer .stop-tracking-btn {
+  all: unset;                    /* reset any inherited styles */
+  box-sizing: border-box;
+  display: block;
+  width: 80%;
+  margin: 0.5rem auto;
+  padding: 0.6em 1.2em;
+  background-color: #e63946;     /* a standout red/orange */
+  color: #fff !important;        /* force white text */
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.container .footer .stop-tracking-btn:hover {
+  background-color: #d62828;
+}
+
+.container .footer .stop-tracking-btn:active {
+  transform: scale(0.98);
+}

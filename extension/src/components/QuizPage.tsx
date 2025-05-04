@@ -11,7 +11,7 @@ const QuizPage = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [corrects, setCorrects] = useState<number>(0);
   // const [inputTopic,setInputTopic] = useState<string>("");
-  const [tracker,setTracker] = useState<boolean>(true);
+// const [tracker,setTracker] = useState<boolean>(true);
 const [selected, setSelected] = useState<string | null>(null);
 
   
@@ -187,6 +187,11 @@ const [selected, setSelected] = useState<string | null>(null);
     }, 1500);
   };
   
+  //Handles the start and stop tracking button
+  // const handleStopClick = () => {
+  //   chrome.runtime.sendMessage({ action: "stopTracking" });
+  //   window.close(); // if you want the popup to auto‐close
+  // };
   
   
 
@@ -419,10 +424,19 @@ const [selected, setSelected] = useState<string | null>(null);
           <QuizPopup quiz={quiz[currentIndex]} onAnswer={handleAnswer} />
         )}
           <div className = "footer">
-            {quiz.length == 0 && (
-              <button onClick={() => setTracker(!tracker)}>
-            {tracker ? 'Stop tracking' : 'Start tracking'}
-          </button>
+            {(
+                <button
+                  className="base-button stop-tracking-btn"
+                  onClick={() => {
+                    // 1) Tell the background script to stop all tracking
+                    chrome.runtime.sendMessage({ action: 'stopTracking' });
+                    // 2) Immediately close this popup
+                    window.close();
+                }}
+              >
+                Stop tracking
+              </button>
+
             )}
           </div>
         </div>
