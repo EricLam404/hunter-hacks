@@ -4,9 +4,9 @@ import { Quiz } from '../quiz';
 import { getActiveTabURL } from '../utils/urlTracker';
 
 const QuizPage = () => {
-  const [url, setUrl] = useState("");
+  //const [url, setUrl] = useState("");
   const [currentUrl, setCurrentUrl] = useState('');
-  const [showInput, setShowInput] = useState<boolean>(true);
+  //const [showInput, setShowInput] = useState<boolean>(true);
   const [quiz, setQuiz] = useState<Quiz[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [corrects, setCorrects] = useState<number>(0);
@@ -123,14 +123,14 @@ const QuizPage = () => {
     );
   };
 
-  const handleUrl = (): void => {
-    if (showInput) {
-      setShowInput(false);
-      console.log(url);
-    } else {
-      setShowInput(true);
-    }
-  };
+  // const handleUrl = (): void => {
+  //   if (showInput) {
+  //     setShowInput(false);
+  //     console.log(url);
+  //   } else {
+  //     setShowInput(true);
+  //   }
+  // };
 
   useEffect(() => {
     if(tracker){
@@ -168,7 +168,7 @@ const QuizPage = () => {
         </div>
           
         <div className="input-box">
-          {showInput && quiz.length == 0 &&(
+          {/* {showInput && quiz.length == 0 &&(
             <input
               type="text"
               value={url}
@@ -186,7 +186,7 @@ const QuizPage = () => {
               <p>Link inputted!</p>
             )}
           </div>
-          )}
+          )} */}
           {currentIndex < quiz.length && (
             <QuizPopup
               quiz={quiz[currentIndex]}
