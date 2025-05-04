@@ -67,6 +67,16 @@ const LandingPage = () => {
                 >
                     Stop tracking
                 </button>
+
+                <button
+                    className="base-button stop-tracking-btn"
+                    onClick={() => {
+                        // 1) Tell the background script to stop all tracking
+                        chrome.runtime.sendMessage({ action: "startTracking" });
+                    }}
+                >
+                    Reset session
+                </button>
             </div>
         );
     }
