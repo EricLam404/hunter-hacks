@@ -3,20 +3,45 @@
     "name": "hunter-hacks extension",
     "version": "1.0.0",
     "description": "A simple React app as a Chrome extension",
-    "action": {
-      "default_popup": "index.html"
-    },
-    "permissions": ["tabs", "activeTab", "scripting", "notifications", "alarms"],
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "scripting",
+        "notifications",
+        "alarms"
+    ],
     "host_permissions": ["<all_urls>"],
     "background": {
-      "service_worker": "background.js"
+        "service_worker": "background.js"
     },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["overlay.js"],
+            "run_at": "document_idle"
+        }
+    ],
     "web_accessible_resources": [
-  {
-    "resources": ["book1.jpg"],
-    "matches": ["<all_urls>"]
-  }
-]
-
-  }
-  
+        {
+            "resources": ["book1.jpg"],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": ["assets/eye.png"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "icons": {
+        "16": "icons/eye-16.png",
+        "48": "icons/eye-48.png",
+        "128": "icons/eye-128.png"
+    },
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": {
+            "16": "icons/eye-16.png",
+            "48": "icons/eye-48.png",
+            "128": "icons/eye-128.png"
+        }
+    }
+}
