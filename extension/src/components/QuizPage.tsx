@@ -10,7 +10,7 @@ const QuizPage = () => {
   const [quiz, setQuiz] = useState<Quiz[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [corrects, setCorrects] = useState<number>(0);
-  // const [inputTopic,setInputTopic] = useState<string>("");
+
 // const [tracker,setTracker] = useState<boolean>(true);
 const [selected, setSelected] = useState<string | null>(null);
 
