@@ -66,13 +66,15 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on focus */
 }
 
-.input-box button {
+.input-box button,
+ .quiz button{
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
   text-align:center;
+  border:1px solid black;
 }
 
 .input-box button:hover {
@@ -88,5 +90,14 @@
   background-color:white;
   color:black;
   border-radius:8px;
-  margin:10px;
+  margin:5px;
+}
+.quiz {
+  min-width:100%;
+  min-height:100%;
+}
+.quiz button {
+  text-align:center;
+  padding-left:0;
+  margin-left:0;
 }
