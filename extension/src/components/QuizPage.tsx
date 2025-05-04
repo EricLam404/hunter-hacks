@@ -61,6 +61,17 @@ const QuizPage = () => {
     console.log("fetchQuizFromAPI was called");
     if(topic != ""){
       try {
+
+         // Saving the topic to the server
+        console.log("Saving topic to server:", topic);
+        await fetch("http://localhost:3000/save-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic })
+        });
+
+        //Then generating the quiz
+        console.log("Generating quiz for topic:", topic);
         const response = await fetch("http://localhost:3000/api/generate", {
           method: "POST",
           headers: {
@@ -68,7 +79,8 @@ const QuizPage = () => {
           },
           body: JSON.stringify({ topic })
         });
-  
+        
+
         if (!response.ok) {
           throw new Error("Failed to fetch quiz");
         }
