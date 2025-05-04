@@ -100,3 +100,39 @@
   padding-left:0;
   margin-left:0;
 }
+.topic-box p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #cfc2e2; 
+    display: inline-block;
+    animation: bounce 1s ease forwards; 
+    margin:0;
+    margin-top:7px;
+    margin-bottom:7px;
+  }
+.topic-box input{
+  margin:0;
+}
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0); 
+    }
+    75% {
+      transform: translateY(-5px); 
+    }
+    100% {
+      transform: translateY(0); 
+    }
+  }
+.footer button {
+  transition: 1s ease;
+}
+.footer button:active {
+  transform: scale(1.1);
+}
