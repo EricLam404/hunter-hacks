@@ -4,9 +4,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    justify-items: center;
     min-width:250px;
     min-height:300px;
-    font-size:0.75em;
+    font-size:1em;
     /*border:1px solid #1a1a1a;*/
   }
 .landing button {
@@ -21,9 +22,22 @@
     border: 2px solid transparent;
     padding: 0.6em 1.2em;
     min-width:100%;
-    margin:0.25rem;
-    font-size: 12px;
+    margin:0.5rem;
+    margin-left:0;
+    margin-right:0;
+    font-size: 1.25em;
     position: relative;
     overflow: hidden;
-    
+}
+
+.landing .landing-start h1{
+  margin-top:1.35em;
+  margin-left:13px;
+  font-size:20px;
+
+}
+
+.landing .landing-start h2{
+  font-size:4em;
+
 }

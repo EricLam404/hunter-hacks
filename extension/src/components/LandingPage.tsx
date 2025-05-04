@@ -91,10 +91,13 @@ const LandingPage = () => {
 
   return (
     <div className="landing">
-      <h1>Welcome to Asian Mom Simulator!</h1>
+      <div className= "landing-start">
+      <h1>Welcome to</h1>
+      <h2>WYD?</h2>
       <RippleButton onClick={handleStart}>
         {loading ? "Loading..." : "Welcome!"}
       </RippleButton>
+      </div>
     </div>
   );
 };

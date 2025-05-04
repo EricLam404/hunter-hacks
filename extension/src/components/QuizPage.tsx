@@ -353,7 +353,7 @@ const [selected, setSelected] = useState<string | null>(null);
       <div className="container">
         <div className="header">
           <a></a>
-          <h1>Asian Mother Simulator!</h1>
+          <h1>WYD?</h1>
         </div>
 
        {/* Loading message */}
