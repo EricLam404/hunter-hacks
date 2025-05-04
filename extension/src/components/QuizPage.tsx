@@ -10,7 +10,8 @@ const QuizPage = () => {
   const [quiz, setQuiz] = useState<Quiz[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [corrects, setCorrects] = useState<number>(0);
-
+  const [inputTopic,setInputTopic] = useState<string>("");
+  
   useEffect(() => {
     console.log("\nuse Effect: ");
     console.log("quiz length: " + quiz.length);
@@ -58,31 +59,33 @@ const QuizPage = () => {
 
   const fetchQuizFromAPI = async (topic: string) => {
     console.log("fetchQuizFromAPI was called");
-    try {
-      const response = await fetch("http://localhost:3000/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ topic })
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch quiz");
+    if(topic != ""){
+      try {
+        const response = await fetch("http://localhost:3000/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ topic })
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to fetch quiz");
+        }
+  
+        const data = await response.json();
+        console.log("Fetched quiz data:", data);
+  
+        const newQuizzes = data.map((q: Quiz) =>
+          new Quiz(q.question, q.options, q.answer)
+        );
+  
+        setQuiz(newQuizzes);
+        setCurrentIndex(0);
+        setCorrects(0);
+      } catch (err) {
+        console.error("Error fetching quiz:", err);
       }
-
-      const data = await response.json();
-      console.log("Fetched quiz data:", data);
-
-      const newQuizzes = data.map((q: Quiz) =>
-        new Quiz(q.question, q.options, q.answer)
-      );
-
-      setQuiz(newQuizzes);
-      setCurrentIndex(0);
-      setCorrects(0);
-    } catch (err) {
-      console.error("Error fetching quiz:", err);
     }
   };
 
@@ -131,6 +134,15 @@ const QuizPage = () => {
           <h1>Asian Mother Simulator!</h1>
         </div>
 
+        <div className = "topic-box">
+          {quiz.length == 0 && (<p>Enter Topic!</p>)}
+          {quiz.length == 0 && (<input
+            className="topic"
+            onChange={(e) => setInputTopic(e.target.value)}
+          />)}
+          {quiz.length == 0 && (<button className="dev" onClick={() => fetchQuizFromAPI(inputTopic)}> QuizTEMPORARY </button>)}
+        </div>
+
         <div className="input-box">
           {showInput && (
             <input
@@ -169,15 +181,12 @@ const QuizPage = () => {
                   setQuiz([]);
                   setCorrects(0);
                   setCurrentIndex(0);
+                  calc = 0;
                 }
               }}
             />
           )}
         </div>
-
-        <button className="dev" onClick={() => fetchQuizFromAPI("science")}>
-          Quiz Example TEMPORARY
-        </button>
       </div>
     </>
   );
