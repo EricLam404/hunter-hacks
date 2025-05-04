@@ -6,6 +6,9 @@ import {
     OPENAI_API_KEY,
 } from "./utils/config/config";
 import { Request, Response, Router } from "express";
+import dotenv from 'dotenv';
+dotenv.config();
+
 import {
     S3Client,
     ListBucketsCommand,

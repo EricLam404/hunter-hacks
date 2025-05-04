@@ -8,8 +8,8 @@ let trackingEnabled = true;
 //let checkIntervalId: number | null = null;
 
 // milliseconds between screenshots
-const PERIOD_IN_SECONDS= 60;
-const CAPTURE_INTERVAL = PERIOD_IN_SECONDS * 1000; // 60 seconds
+const PERIOD_IN_SECONDS= 20;
+const CAPTURE_INTERVAL = (PERIOD_IN_SECONDS+1) * 1000; // 60 seconds
 let lastCaptureTime = 0;
 
 export let sessionData = {
