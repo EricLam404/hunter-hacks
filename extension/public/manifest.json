@@ -6,10 +6,17 @@
     "action": {
       "default_popup": "index.html"
     },
-    "permissions": ["tabs", "activeTab", "scripting"],
+    "permissions": ["tabs", "activeTab", "scripting", "notifications"],
     "host_permissions": ["<all_urls>"],
     "background": {
       "service_worker": "background.js"
-    }
+    },
+    "web_accessible_resources": [
+  {
+    "resources": ["book1.jpg"],
+    "matches": ["<all_urls>"]
+  }
+]
+
   }
   
