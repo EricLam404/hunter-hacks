@@ -152,7 +152,7 @@ export function App() {
     <>
     <div style={{ padding: '1rem', width: '250px' }}>
       <h3>Current Tab URL:</h3>
-      <p style={{ wordWrap: 'break-word' }}>{url || 'Loading...'}</p>
+      <p style={{ wordWrap: 'break-word' }}>{currentUrl || 'Loading...'}</p>
     </div>
 
       <div className = "container">
