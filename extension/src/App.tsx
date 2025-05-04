@@ -7,7 +7,7 @@ import { getActiveTabURL } from './utils/urlTracker';
 export function App() {
   //const [count, setCount] = useState(0)
   const [url,setUrl] = useState("");
-  const [currentUrl,setCurrentUrl] = useState("");
+  const [currentUrl,setCurrentUrl] = useState('');
   
   const [showInput,setShowInput] = useState<boolean>(true);
 
@@ -79,22 +79,48 @@ export function App() {
   /* 
     To display the Quiz in our tab
   */ 
+    const fetchQuizFromAPI = async (topic: string) => {
+      try {
+        const response = await fetch("http://localhost:3000/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ topic })
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to fetch quiz");
+        }
+        
+        const data = await response.json();
+        console.log("Fetched quiz data:", data);
+    
+        const newQuizzes = data.map((q: Quiz) => 
+          new Quiz(q.question, q.options, q.answer)
+        );
+  
+        setQuiz(newQuizzes);
+        setCurrentIndex(0);
+        setCorrects(0);
+      } catch (err) {
+        console.error("Error fetching quiz:", err);
+      }
+    };
   type QuizPopupProps = {
     quiz: Quiz;
     onAnswer: (choice: string) => void;
   };
   const QuizPopup: React.FC<QuizPopupProps> = ({ quiz, onAnswer }) => {
     return (
-      <div className="container">
         <div className="quiz">
           <h3>{quiz.question}</h3>
-          {quiz.choices.map((choice, i) => (
+          {quiz.options.map((choice, i) => (
             <button key={i} onClick={() => onAnswer(choice)}>
               {choice}
             </button>
           ))}
         </div>
-      </div>
     );
   };
 
@@ -103,7 +129,7 @@ export function App() {
       setShowInput(false);
       console.log(url);
 
-      //send urlto the openAI and scan content;
+      //send url to the openAI and scan content;
     }else{
       setShowInput(true);
     }
@@ -111,48 +137,33 @@ export function App() {
 /*
   input a specific question,choie, and answer to the quiz array
 */ 
-  const handleQuiz = (
-    question: string,
-    choices: string[],
-    answer: string
-  ): void => {
+  // const handleQuiz = (
+  //   question: string,
+  //   choices: string[],
+  //   answer: string
+  // ): void => {
 
-    //  TESTING
-    try {
-      const q = new Quiz(question, choices, answer);
-      for(let i =0; i < 3;i++){
-        setQuiz(prev => [...prev, q]);
-      }
-    } catch (err) {
-      console.error("Failed to create quiz:", err);
-    }
-  };
-
-
-  //
-
-  // const [savedURL, setSavedUrl] = useState('');
-
+  //   //  TESTING
+  //   try {
+  //     const q = new Quiz(question, choices, answer);
+  //     for(let i =0; i < 3;i++){
+  //       setQuiz(prev => [...prev, q]);
+  //     }
+  //   } catch (err) {
+  //     console.error("Failed to create quiz:", err);
+  //   }
+  // };
+  
   useEffect(() => {
     getActiveTabURL().then(setCurrentUrl).catch(console.error);
     console.log(currentUrl);
   }, []);
 
-  // const handleSaveUrl = () => {
-  //   setSavedUrl(url);
-  // }
-
-
-
-  // const handleSaveUrl = () => {
-  //   setSavedUrl(url);
-  // 
-
   return (
     <>
     <div style={{ padding: '1rem', width: '250px' }}>
       <h3>Current Tab URL:</h3>
-      <p style={{ wordWrap: 'break-word' }}>{url || 'Loading...'}</p>
+      <p style={{ wordWrap: 'break-word' }}>{currentUrl || 'Loading...'}</p>
     </div>
 
       <div className = "container">
@@ -216,7 +227,7 @@ export function App() {
           )}
         </div>
         {/* This is temporary*/} 
-       <button className = "dev" onClick={()=> handleQuiz("Question",["1","2","3","Answer"],"Answer")}>Quiz Example</button>
+       <button className = "dev" onClick={()=> fetchQuizFromAPI("science")}>Quiz Example TEMPORARY</button>
        {/* <button className = "dev" onClick={()=> handleReset()}>reset </button> */}
       </div>
     </>

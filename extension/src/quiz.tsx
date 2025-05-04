@@ -1,6 +1,6 @@
 export class Quiz{
     question: string;
-    choices: string[];
+    options: string[];
     answer: string;
 
 constructor(question: string, choices: string[], answer: string) {
@@ -9,7 +9,7 @@ constructor(question: string, choices: string[], answer: string) {
     }
 
     this.question = question;
-    this.choices = choices;
+    this.options = choices;
     this.answer = answer;
   }
 
