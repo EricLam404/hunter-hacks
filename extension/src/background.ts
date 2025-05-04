@@ -8,7 +8,8 @@ let trackingEnabled = true;
 //let checkIntervalId: number | null = null;
 
 // milliseconds between screenshots
-const CAPTURE_INTERVAL = 60_000;
+const PERIOD_IN_SECONDS= 60;
+const CAPTURE_INTERVAL = PERIOD_IN_SECONDS * 1000; // 60 seconds
 let lastCaptureTime = 0;
 
 export let sessionData = {
@@ -48,7 +49,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
         return;
     }
     if (message.action === "startTracking") {
-        chrome.alarms.create("captureAlarm", { periodInMinutes: 1 });
+        chrome.alarms.create("captureAlarm", { periodInMinutes: PERIOD_IN_SECONDS / 60 });
         console.log("▶️ capture Alarm created — tracking resumed");
         return;
     }
@@ -255,7 +256,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 // 1) When the extension is installed or reloaded, schedule a 1-minute alarm
 chrome.runtime.onInstalled.addListener(() => {
     console.log("🔔 Scheduling capture Alarm every minute");
-    chrome.alarms.create("captureAlarm", { periodInMinutes: 0.25 });
+    chrome.alarms.create("captureAlarm", { periodInMinutes: PERIOD_IN_SECONDS / 60 });
 });
 
 // 2) Respond to the alarm firing
