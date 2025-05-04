@@ -27,7 +27,7 @@
             "matches": ["<all_urls>"]
         },
         {
-            "resources": ["assets/eye.png"],
+            "resources": ["assets/blinking-eye.gif"],
             "matches": ["<all_urls>"]
         }
     ],
