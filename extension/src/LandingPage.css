@@ -23,7 +23,7 @@
     min-width:100%;
     margin:0.25rem;
     font-size: 12px;
-}
-.landing button:hover{
-    border-color: #646cff;
+    position: relative;
+    overflow: hidden;
+    
 }
